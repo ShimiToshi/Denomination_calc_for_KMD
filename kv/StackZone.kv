@@ -1,0 +1,32 @@
+<StackZone>
+    id : stackzone
+    orientation: "horizontal"
+
+    BoxLayout:
+        orientation: "vertical"
+        Label:
+            text : "Name"
+            size_hint_y: 0.05
+        Label:
+            size_hint_y: 0.95
+            padding_x : 20
+            text_size: self.size[0], self.size[1]-30
+            halign: 'right'
+            valign: 'top'
+            id : stacknamelabel
+            text:   ""
+
+    BoxLayout:
+        orientation: "vertical"
+        Label:
+            size_hint_y: 0.05
+            text : "Wag"
+
+        Label:
+            size_hint_y: 0.95
+            padding_x : 20
+            text_size: self.size[0], self.size[1]-30
+            halign: 'right'
+            valign: 'top'
+            id : stackwaglabel
+            text:   ""

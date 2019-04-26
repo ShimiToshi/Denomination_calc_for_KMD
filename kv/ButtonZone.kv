@@ -1,0 +1,84 @@
+<ButtonZone>
+    id : buttonzone
+    orientation: "vertical"
+    padding: 20
+
+    BoxLayout:
+        orientation: "horizontal"
+        size_hint_y: None
+        height : 30
+
+        Label :
+            text : "csv loader"
+        Button:
+            text: 'Load'
+            on_release: root.show_load()
+
+    BoxLayout:
+        orientation: "vertical"
+        size_hint_y : 0.4
+        padding: 20
+
+        BoxLayout:
+            orientation :"horizontal"
+
+            Label:
+                size_hint_x : 0.7
+                text: "Worker\nName"
+            TextInput:
+                id: text_name
+                multiline: False
+                write_tab: False
+                text: ""
+
+        BoxLayout:
+            orientation: "horizontal"
+
+            Label:
+                size_hint_x : 0.7
+                text: "Wag"
+
+            TextInput:
+                id: text_wag
+                multiline: False
+                write_tab: False
+                text: ""
+
+        Button:
+            size_hint_y : 0.4
+            text : "Set"
+            on_release:
+                root.clicked_add()
+
+
+    BoxLayout:
+
+        padding : 20
+        size_hint_y: 0.5
+
+        Button:
+            id : allsum
+            text : "All Sum"
+            on_release: root.allsum()
+
+
+<LoadDialog>:
+    BoxLayout:
+        size: root.size
+        pos: root.pos
+        orientation: "vertical"
+
+        FileChooserListView:
+            id: filechooser
+            path : root.current_dir
+
+        BoxLayout:
+            size_hint_y: None
+            height: 30
+            Button:
+                text: "Cancel"
+                on_release: root.cancel()
+
+            Button:
+                text: "Load"
+                on_release: root.load(filechooser.path, filechooser.selection)
