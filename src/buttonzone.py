@@ -35,6 +35,7 @@ class ButtonZone(BoxLayout):
     def clicked_add(self):
         name = self.ids["text_name"].text
         wag = self.ids["text_wag"].text
+        typ = self.ids["text_type"].text
 
         if name == "" or wag == "":
             return
@@ -51,7 +52,6 @@ class ButtonZone(BoxLayout):
 
         print(name, wag)
         self.parent.send_info_to_stack([name, wag])
-
 
     def allsum(self):
         print("allsum")

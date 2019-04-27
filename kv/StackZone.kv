@@ -30,3 +30,18 @@
             valign: 'top'
             id : stackwaglabel
             text:   ""
+
+    BoxLayout:
+        orientation: "vertical"
+        Label:
+            size_hint_y: 0.05
+            text : "Type"
+
+        Label:
+            size_hint_y: 0.95
+            padding_x : 20
+            text_size: self.size[0], self.size[1]-30
+            halign: 'right'
+            valign: 'top'
+            id : stacktypelabel
+            text:   ""

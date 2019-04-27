@@ -29,4 +29,6 @@ class WorkerInfo(BoxLayout):
 
     def __init__(self, workerinfo, **kwargs):
         self.name = workerinfo[0]
+        if len(self.name) >= 10:
+            self.name = self.name[:10]
         self.wag = workerinfo[1]
