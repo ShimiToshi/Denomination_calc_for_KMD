@@ -1,2 +1,19 @@
 <CmdZone>
     id : cmdzone
+
+    canvas:
+        Color:
+            rgb: 0.2, 0.2, 0.2
+
+        Rectangle:
+            pos: self.x, self.y
+            size: root.size
+
+    Label:
+        padding : 10, 3
+        text_size: self.size[0], self.size[1]-30
+        halign: 'right'
+        valign: 'top'
+        id : cmdarea
+        text:   "[color=229944]"
+        markup : True

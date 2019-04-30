@@ -21,6 +21,8 @@
 
         BoxLayout:
             orientation :"horizontal"
+            size_hint_y : None
+            height : 44
 
             Label:
                 size_hint_x : 0.7
@@ -33,6 +35,8 @@
 
         BoxLayout:
             orientation: "horizontal"
+            size_hint_y : None
+            height : 44
 
             Label:
                 size_hint_x : 0.7
@@ -52,8 +56,9 @@
                 text: "Type"
 
             Spinner:
-                text: 'Yen'
-                values: 'Yen', 'USD'
+                id: text_type
+                text: 'JPY'
+                values: 'JPY', 'USD'
                 size_hint: None, None
                 size: 100, 44
                 pos_hint: {'center_x': .5, 'center_y': .5}
@@ -67,14 +72,21 @@
 
 
     BoxLayout:
-
+        orientation: "vertical"
         padding : 20
         size_hint_y: 0.5
 
         Button:
+            size_hint_y: 0.7
             id : allsum
             text : "All Sum"
             on_release: root.allsum()
+
+        Button:
+            size_hint_y: 0.3
+            id : cmdreset
+            text : "Cmd Reset"
+            on_release: root.resetcmd()
 
 
 <LoadDialog>:

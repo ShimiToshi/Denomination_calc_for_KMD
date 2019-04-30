@@ -6,17 +6,17 @@ ops = {
         JPY :
             {
                 "name":JPY,
-                "rate": 1.0,
                 "coin":[1, 5, 10, 50, 100, 1000, 10000],
                 "main": "Yen",
+                "subrate": 0,
                 "sub" : None,
             },
         USD :
             {
                 "name": USD,
-                "rate": 111.88,
                 "coin":[0.01, 0.05, 0.1, 0.25, 0.5, 1, 5, 10, 20, 50, 100],
-                "main": "Doller",
+                "main": "Doll",
+                "subrate": 100,
                 "sub" : "Cent",
             },
 
@@ -53,7 +53,7 @@ def all_coin_calc(wags, ope=JPY):
 
     # まず、ope によって、効果の変換レートに対応したものを選定
 
-    wag = wags / ops[ope]["rate"]
+    wag = wags
 
     print(ops[ope]["name"], wags, wag)
 
@@ -62,7 +62,10 @@ def all_coin_calc(wags, ope=JPY):
         wag , ret = coin_calc(wag, op)
         rets.append(ret)
 
-    return rets
+    return rets, ope_info(ope)
 
 def coin_calc(wag, value):
     return wag%value, [value, int(wag/value), wag%value]
+
+def ope_info(ope):
+    return ops[ope]

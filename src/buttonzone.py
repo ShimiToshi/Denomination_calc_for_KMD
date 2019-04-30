@@ -4,6 +4,7 @@ from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.floatlayout import FloatLayout
 from kivy.properties import ObjectProperty
 from kivy.uix.popup import Popup
+import csv
 
 
 class LoadDialog(FloatLayout):
@@ -26,10 +27,19 @@ class ButtonZone(BoxLayout):
         self._popup.open()
 
     def load(self, path, filename):
-        with open(os.path.join(path, filename[0])) as stream:
-            print(stream.read())
-            #self.text_input.text = stream.read()
+        workerinfos = []
+        with open(os.path.join(path, filename[0]), "r") as f:
+            reader = csv.reader(f)
+            header = next(reader)
 
+            for data in reader:
+                if data[2] == "JPY":
+                    data[1] = int(data[1])
+                else:
+                    data[1] = float(data[1])
+                workerinfos.append(data)
+
+        self.parent.send_csvinfo_to_stack(workerinfos)
         self.dismiss_popup()
 
     def clicked_add(self):
@@ -42,16 +52,23 @@ class ButtonZone(BoxLayout):
 
         self.ids["text_wag"].text = ""
 
-        try:
-            wag = int(wag)
-        except ValueError:
-            print("ValueError")
-            return
+        if typ == "JPY":
+            try:
+                wag = int(wag)
+            except ValueError:
+                print("ValueError")
+                return
+        else:
+            wag = float(wag)
 
         self.ids["text_name"].text = ""
 
         print(name, wag)
-        self.parent.send_info_to_stack([name, wag])
+        self.parent.send_info_to_stack([name, wag, typ])
 
     def allsum(self):
         print("allsum")
+        self.parent.send_info_to_cmd()
+
+    def resetcmd(self):
+        self.parent.reset_cmd()

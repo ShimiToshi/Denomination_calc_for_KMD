@@ -3,6 +3,12 @@ from kivy.uix.label import Label
 from kivy.uix.boxlayout import BoxLayout
 from kivy.clock import Clock
 
+from kivy.resources import resource_add_path
+from kivy.core.text import LabelBase, DEFAULT_FONT
+
+resource_add_path("font")
+LabelBase.register(DEFAULT_FONT, "Cica-Bold.ttf")
+
 from kivy.config import Config
 Config.set('graphics', 'width', '1280')
 Config.set('graphics', 'height', '720')
@@ -42,12 +48,17 @@ class RootWidget(BoxLayout):
                 self.cmdzone = zone
 
     def send_info_to_stack(self, workerinfo):
-        print("in!")
         self.stackzone.add_workerinfo(workerinfo)
-        print("out")
 
-    def send_csvinfo_to_stack(self):
-        pass
+    def send_csvinfo_to_stack(self, workerinfos):
+        for workerinfo in workerinfos:
+            self.stackzone.add_workerinfo(workerinfo)
+
+    def send_info_to_cmd(self):
+        self.cmdzone.get_stacks(self.stackzone.load_stacks())
+
+    def reset_cmd(self):
+        self.cmdzone.reset_area()
 
 class TestApp(App):
     def build(self):
